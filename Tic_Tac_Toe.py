@@ -33,8 +33,6 @@ def make_list_of_free_fields(board):
 def enter_move(board):
     free = (make_list_of_free_fields(board))
     free_as_list = list(free)
-    num = int(input("Select a square:\n"))
-    print(num)
 
     def inner_func(board,num):
         for x in free_as_list:
@@ -42,6 +40,16 @@ def enter_move(board):
                 for j in range(len(board[i])):
                     if board[i][j] == num:
                         board[i][j] = 'O'
+
+    while True:
+        try:
+            num = int(input("Select a square:\n"))
+            print(num)
+            break
+        except ValueError:
+            print("Incorrect entry. Only enter available numbers 1 through 9. Try again.")
+        except EOFError:
+            print("Bye Bye.")
 
     if num not in free_as_list:
         print("That square is taken!")
